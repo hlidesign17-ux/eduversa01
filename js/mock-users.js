@@ -1,4 +1,4 @@
-// Data akun otomatis untuk kelas X1-X5, XI1-XI5, dan XII1-XII5
+// mock-users.js
 function generateUsers() {
   const grades = ["X", "XI", "XII"];
   const classCodes = [
@@ -13,21 +13,17 @@ function generateUsers() {
 
   grades.forEach((grade) => {
     classCodes.forEach(({ num, code }) => {
-      // Pembentukan nama kelas penuh (misal: "X1", "XI3", "XII5")
       const fullClassName = `${grade}${num}`;
 
-      // Loop untuk 40 siswa per kelas
       for (let i = 1; i <= 40; i++) {
         const numStr = i < 10 ? `0${i}` : `${i}`;
-
-        // Pola baru: edu + X1 + v + 01 -> eduX1v01
         const key = `${fullClassName}${code}${numStr}`;
 
         users.push({
-          username: `edu${key}`,
-          password: `alfalah${key}`,
+          username: `edu${key}`.toLowerCase(),   // Hasil: edux1v01
+          password: `alfalah${key}`,             // Hasil: alfalahX1v01
           grade: grade,
-          className: fullClassName, // Output: "X1", "X2", "XI1", dll.
+          className: fullClassName,
         });
       }
     });
