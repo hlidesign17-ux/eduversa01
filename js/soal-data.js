@@ -14,54 +14,55 @@ export const DATA_SOAL = [
   },
   {
     id: 2,
-    image: "assets/images/soal02.png",
-    question: "Perhatikan ikon di atas. Ikon tersebut menunjukkan ...",
-    options: ["folder", "file", "Menu Bar", "Tab Menu"],
+    image: "assets/images/Soal02.png",
+    question:
+      "Berdasarkan posisi objek pada gambar di atas, pilihlah kata depan yang paling tepat untuk melengkapi kalimat berikut:'The student put his English dictionary _____ his backpack, while the cat was sleeping comfortable _____ the carpet",
+    options: ["at/in", "in/on", "on/in", "at/on"],
 
-    correctAnswer: 0, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
-  },
-  {
-    id: 3,
-    image: "assets/images/soal03.png",
-    question:
-      "Gambar yang berfungsi untuk membuat nama pada file scratch ditunjukkan oleh gambar dengan nomor berapa...?",
-    options: ["Gambar No 1", "Gambar No 2", "Gambar No 3", "Gambar No 4"],
-    correctAnswer: 0, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
-  },
-  {
-    id: 4,
-    image: "assets/images/soal04.png",
-    question:
-      "Gambar-gambar di atas merupakan bagian scratch yang terdapat pada bagian...",
-    options: ["Tab Menu", "Menu Bar", "Code", "Properties"],
     correctAnswer: 1, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
   },
   {
-    id: 5,
-    image: "assets/images/soal05.png",
+    id: 3,
+    image: "assets/images/Soal03.png",
     question:
-      "Nama Tab yang kita gunakan untuk mengubah bentuk dan mengubah warna sprite secara manual adalah...",
-    options: ["Edit", "Backdrop", "Costumes", "Code"],
+      "Perhatikan penanda waktu pada gambar jam dan kalender di atas. The morning assembly always begins exactly _____ 07:00 AM _____ Monday morning.",
+    options: ["in/on", "on/at", "at/on", "on/in"],
     correctAnswer: 2, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
   },
   {
-    id: 6,
-    image: "assets/images/soal06.png",
+    id: 4,
+    image: "assets/images/Soal04.png",
     question:
-      "Perhatikan pola pada gambar di atas. Berapa garis yang dapat dibentuk oleh gambar di atas?",
-    options: ["4 garis", "5 garis", "6 garis", "7 garis"],
+      "Perhatikan visual lokasi di atas. Our new school branch is located _____ Bandung, precisely _____ Merdeka Street.",
+    options: ["in/on", "on/at", "at/on", "on/in"],
+    correctAnswer: 0, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
+  },
+  {
+    id: 5,
+    image: "assets/images/Soal05.png",
+    question:
+      "Perhatikan gambar dan jawab berdasarkan pilihan yang paling tepat",
+    options: ["on/on", "at/on", "at/in", "in/on"],
+    correctAnswer: 0, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
+  },
+  {
+    id: 6,
+    image: "assets/images/Soal06.png",
+    question:
+      "Perhatikan gambar dan jawab berdasarkan pilihan yang paling tepat",
+    options: ["at/in", "in/on", "at/at", "7 garis"],
     correctAnswer: 2, // Index jawaban benar (0=A, 1=B, 2=C, 3=D) 6 garis
   },
   {
     id: 7,
-    image: "assets/images/soal07.png",
+    image: "assets/images/Soal07.png",
     question: "Apa nama kelompok kode yang ditunjukkan oleh gambar di atas?",
     options: ["Event", "Control", "Motion", "Looks"],
     correctAnswer: 2, // Index jawaban benar (0=A, 1=B, 2=C, 3=D) motion
   },
   {
     id: 8,
-    image: "assets/images/soal08.png",
+    image: "assets/images/Soal08.png",
     question:
       "Perhatikan gambar di atas dengan teliti. Bagaimana kalimat kode yang tepat agar sprite Mario dapat berada tepat di bawah blok tanda tanya?",
     options: [
@@ -74,7 +75,7 @@ export const DATA_SOAL = [
   },
   {
     id: 9,
-    image: "assets/images/soal09.png",
+    image: "assets/images/Soal09.png",
     question:
       "Perhatikan gambar di atas dengan sangat teliti! Bagaimana kalimat kode yang tepat agar sprite Mario dapat berada tepat di bawah blok tanda tanya?",
     options: [
@@ -87,7 +88,7 @@ export const DATA_SOAL = [
   },
   {
     id: 10,
-    image: "assets/images/soal10.png",
+    image: "assets/images/Soal10.png",
     question:
       "Perhatikan gambar di atas dengan sangat teliti! Bagaimana kalimat kode yang tepat agar kaki dari sprite Mario dapat berada sama tinggi dengan pipa yang ada di sebelahnya?",
     options: [
@@ -98,69 +99,5 @@ export const DATA_SOAL = [
     ],
     correctAnswer: 0, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
   },
-  {
-    id: 11,
-    image: "assets/images/soal11.png",
-    question:
-      "Perhatikan gambar di atas dengan sangat teliti! Bagaimana kalimat kode yang tepat agar sprite Mario dapat mencapai jamur?",
-    options: [
-      "change y by -2, change x by 2",
-      "change x by 2, change y by -2",
-      "change x by 2, change x by -2",
-      "change y by -2, change y by -2",
-    ],
-    correctAnswer: 1, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
-  },
-  {
-    id: 12,
-    image: "assets/images/soal12.png",
-    question:
-      "Apa kalimat kode yang tepat agar mario dapat menghadap ke arah tiang bendera dengan tepat?",
-    options: [
-      "change x by 4",
-      "point in direction 90",
-      "change y by 4",
-      "point in direction -90",
-    ],
-    correctAnswer: 1, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
-  },
-  {
-    id: 13,
-    image: "assets/images/soal13.png",
-    question:
-      "Apa kalimat kode yang sangat tepat agar mario dapat meraih jamur?",
-    options: [
-      "point in direction 90, change x by 2",
-      "change x by 2, point in direction 90",
-      "change x by 2",
-      "tidak ada yang benar",
-    ],
-    correctAnswer: 0, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
-  },
-  {
-    id: 14,
-    image: "assets/images/soal14.png",
-    question:
-      "Apa kalimat kode yang sangat tepat agar mario dapat meraih jamur?",
-    options: [
-      "point in direction 90, change x by 5",
-      "point in direction 90, change x by -5",
-      "point in direction -90, change x by 5",
-      "point in direction -90, change x by -5",
-    ],
-    correctAnswer: 3, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
-  },
-  {
-    id: 15,
-    image: "assets/images/soal15.png",
-    question:
-      "Apa kalimat kode yang sangat tepat agar mario dapat meraih kotak tanda tanya dengan selamat?",
-    options: [
-      "point in direction 90,<br>change x by 1,<br> change y by -2,<br> point in direction -90,<br> change x by -1",
-      "point in direction 90,<br>change x by 1,<br> change y by -2,<br> change x by -1",
-      "change x by -2, <br> change y by -2,<br>point in direction 90, <br>change x by 2",
-      "change x by -2, <br> change y by -2,<br>change x by 2",
-    ],
-    correctAnswer: 0,
-  }, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
+  // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
 ];

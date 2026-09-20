@@ -20,8 +20,8 @@ function generateUsers() {
         const key = `${fullClassName}${code}${numStr}`;
 
         users.push({
-          username: `edu${key}`.toLowerCase(),   // Hasil: edux1v01
-          password: `alfalah${key}`,             // Hasil: alfalahX1v01
+          username: `edu${key}`.toLowerCase(), // Hasil: edux1v01
+          password: `alfalah${key}`, // Hasil: alfalahX1v01
           grade: grade,
           className: fullClassName,
         });
