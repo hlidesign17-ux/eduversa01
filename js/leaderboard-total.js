@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!gradeSelect || !leaderboardBody) return;
 
   gradeSelect.addEventListener("change", async (e) => {
-    const selectedGrade = parseInt(e.target.value, 10);
+    // PERBAIKAN: Ambil langsung string nilai (misal: "X", "XI", "XII") tanpa parseInt
+    const selectedGrade = e.target.value.trim();
     if (!selectedGrade) return;
 
     await renderLeaderboardByGrade(selectedGrade);
@@ -42,11 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // 3. Filter berdasarkan 'grade' atau awalan 'class_name'
+      // 3. PERBAIKAN: Filter berdasarkan string Romawi (misal: "X", "XI", "XII")
       const filteredData = (data || []).filter((item) => {
         if (item.grade === grade) return true;
-        if (item.class_name && item.class_name.startsWith(grade.toString()))
-          return true;
+        if (item.class_name && item.class_name.startsWith(grade)) return true;
         return false;
       });
 

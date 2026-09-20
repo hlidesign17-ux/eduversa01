@@ -244,10 +244,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const filtered = cachedLeaderboardData.filter((user) => {
       if (selectedGrade === "all") return true;
-      const gradeNum = parseInt(selectedGrade, 10);
-      if (user.grade === gradeNum) return true;
+
+      // 1. Cocokkan jika grade sama persis (misal: "X" === "X")
+      if (user.grade === selectedGrade) return true;
+
+      // 2. Atau jika class_name diawali dengan grade tersebut (misal: "X1" diawali "X")
       if (user.class_name && user.class_name.startsWith(selectedGrade))
         return true;
+
       return false;
     });
 

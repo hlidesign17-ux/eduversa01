@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!loginForm) return;
 
-  // Helper untuk mengekstrak tingkat kelas ("X", "XI", atau "XII") dari nama kelas (misal "X-1" -> "X")
+  // Helper untuk mengekstrak tingkat kelas ("X", "XI", atau "XII")
   function extractGrade(className) {
     if (!className) return "X";
     if (className.startsWith("XII")) return "XII";
@@ -21,14 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return "X";
   }
 
-  // Auto-fill & Lock Nama Lengkap & Kelas dari Supabase ketika username diisi
+  // Auto-fill & Lock Nama Lengkap & Kelas dari Supabase
   if (usernameInput) {
     usernameInput.addEventListener("blur", async () => {
       const inputUsername = usernameInput.value.trim().toLowerCase();
       if (!inputUsername) return;
 
       try {
-        // [PERBAIKAN 1]: Mengubah "users" menjadi "users01"
         const { data: userDb } = await supabase
           .from("users01")
           .select("full_name, class_name")
@@ -36,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
           .maybeSingle();
 
         if (userDb) {
-          // JIKA USER SUDAH ADA: Isikan data asli dan KUNCI input
           if (fullnameInput && userDb.full_name) {
             fullnameInput.value = userDb.full_name;
             fullnameInput.disabled = true;
@@ -46,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
             classSelect.disabled = true;
           }
         } else {
-          // JIKA USER BARU: Buka kunci input agar bisa diisi
           if (fullnameInput) fullnameInput.disabled = false;
           if (classSelect) classSelect.disabled = false;
         }
@@ -56,9 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ==========================================
   // 1. MANAJEMEN DEVICE ID UNIK
-  // ==========================================
   let deviceId = localStorage.getItem("edualfalah_device_id");
   if (!deviceId) {
     deviceId =
@@ -70,9 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("edualfalah_device_id", deviceId);
   }
 
-  // ==========================================
   // 2. EVENT LISTENER SUBMIT LOGIN
-  // ==========================================
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -81,10 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputFullName = fullnameInput ? fullnameInput.value.trim() : "";
     const inputClass = classSelect ? classSelect.value : "";
 
-    // A. Validasi Kredensial Lokal (MOCK_USERS)
+    // PERBAIKAN: Gunakan .toLowerCase() pada user.username agar tidak case-sensitive
     const foundUser = MOCK_USERS.find(
       (user) =>
-        user.username === inputUsername && user.password === inputPassword,
+        user.username.toLowerCase() === inputUsername &&
+        user.password === inputPassword,
     );
 
     if (!foundUser) {
@@ -93,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      // B. CEK PENGUNCIAN PERANGKAT DARI SUPABASE [PERBAIKAN 1: users01]
+      // CEK PENGUNCIAN PERANGKAT (users01)
       const { data: boundUser, error: boundErr } = await supabase
         .from("users01")
         .select("username")
@@ -110,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // C. CEK EXISTENSI AKUN DI DATABASE SUPABASE [PERBAIKAN 1: users01]
+      // CEK EKSISTENSI AKUN DI DATABASE (users01)
       const { data: existingUser } = await supabase
         .from("users01")
         .select(
@@ -124,14 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
       let finalGrade = "X";
 
       if (existingUser) {
-        // D1. JIKA AKUN SUDAH ADA
         finalFullName = existingUser.full_name;
         finalClass = existingUser.class_name;
-
-        // [PERBAIKAN 2]: Menangani penentuan 'grade' berbasis Romawi X, XI, XII
         finalGrade = existingUser.grade || extractGrade(finalClass);
 
-        // Update device_id dan status aktif [PERBAIKAN 1: users01]
         const { error: updateErr } = await supabase
           .from("users01")
           .update({
@@ -146,7 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
       } else {
-        // D2. JIKA AKUN BARU
         if (!inputFullName || !inputClass) {
           alert(
             "Harap lengkapi Nama Lengkap dan Kelas untuk pendaftaran awal!",
@@ -156,11 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         finalFullName = inputFullName;
         finalClass = inputClass;
-
-        // [PERBAIKAN 2]: Menangani penentuan 'grade' berbasis Romawi X, XI, XII
         finalGrade = extractGrade(inputClass);
 
-        // Insert akun baru [PERBAIKAN 1: users01]
         const { error: insertErr } = await supabase.from("users01").insert({
           username: inputUsername,
           device_id: deviceId,
@@ -179,14 +165,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // E. BERSIHKAN SESI LAMA & SIMPAN SESI BARU
+      // SIMPAN SESI BARU
       localStorage.removeItem("edualfalah_session");
 
       localStorage.setItem("edualfalah_device_owner", inputUsername);
       localStorage.setItem("edualfalah_fullname", finalFullName);
       localStorage.setItem("edualfalah_class", finalClass);
 
-      // Sinkronisasi status latihan
       const isSubmitted = existingUser
         ? Boolean(existingUser.is_latihan01_submitted)
         : false;
@@ -214,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }),
       );
 
-      // F. REDIRECT
       setTimeout(() => {
         window.location.href = "05edualfalah2.html";
       }, 100);
@@ -224,9 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ==========================================
   // 3. TOGGLE MATA PASSWORD
-  // ==========================================
   const toggleBtn = document.getElementById("toggle-password-03");
   if (toggleBtn && passwordInput) {
     const eyeOpen = toggleBtn.querySelector(".eye-open");
