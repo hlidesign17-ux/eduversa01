@@ -13,12 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!loginForm) return;
 
   // Helper untuk mengekstrak tingkat kelas ("X", "XI", atau "XII")
+
   function extractGrade(className) {
-    if (!className) return "X";
-    if (className.startsWith("XII")) return "XII";
-    if (className.startsWith("XI")) return "XI";
-    if (className.startsWith("X")) return "X";
-    return "X";
+    if (!className) return 10;
+    if (className.startsWith("XII")) return 12;
+    if (className.startsWith("XI")) return 11;
+    if (className.startsWith("X")) return 10;
+    return 10;
   }
 
   // Auto-fill & Lock Nama Lengkap & Kelas dari Supabase
