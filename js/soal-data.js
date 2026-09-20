@@ -1,18 +1,5 @@
 export const DATA_SOAL = [
   {
-    id: 1,
-    image: "assets/images/soal01.png",
-    question:
-      "Apa yang terjadi saat dua tombol di atas ditekan secara bersamaan?",
-    options: [
-      "Membuka File Explorer",
-      "Membuka Task Manager",
-      "Membuka Settings",
-      "Membuka Command Prompt",
-    ],
-    correctAnswer: 0, // Index jawaban benar (0=A, 1=B, 2=C, 3=D)
-  },
-  {
     id: 2,
     image: "assets/images/Soal02.png",
     question:
