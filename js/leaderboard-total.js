@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       // 2. Ambil Data Real-time dari Supabase (Hanya siswa yang SUDAH MENGERJAKAN / BUKAN NULL)
       const { data, error } = await supabase
-        .from("users")
+        .from("users01")
         .select("username, class_name, grade, score_latihan01")
         .not("score_latihan01", "is", null) // Filter out nilai NULL
         .order("score_latihan01", { ascending: false, nullsFirst: false });

@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     // A. Cek apakah device_id terikat akun lain
     const { data: boundUser, error: boundErr } = await supabase
-      .from("users")
+      .from("users01")
       .select("username")
       .eq("device_id", deviceId)
       .neq("username", currentUsername)
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // B. Ambil data profil, skor, dan status submission dari Supabase
     const { data: userData, error: userErr } = await supabase
-      .from("users")
+      .from("users01")
       .select(
         "username, full_name, class_name, device_id, score_latihan01, is_latihan01_submitted",
       )
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Ikat device_id jika belum terikat
     if (!currentUserData.device_id) {
       await supabase
-        .from("users")
+        .from("users01")
         .update({ device_id: deviceId })
         .eq("username", currentUsername);
     }
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       const { data, error } = await supabase
-        .from("users")
+        .from("users01")
         .select("username, class_name, grade, score_latihan01")
         .eq("is_latihan01_submitted", true)
         .order("score_latihan01", { ascending: false });

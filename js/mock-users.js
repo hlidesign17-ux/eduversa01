@@ -1,18 +1,20 @@
-// Data akun otomatis untuk kelas 4, 5, dan 6 (A-D)
+// Data akun otomatis untuk kelas X, XI, dan XII (1-5)
 function generateUsers() {
-  const grades = [4, 5, 6];
+  const grades = ["X", "XI", "XII"];
   const classCodes = [
-    { classSuffix: "A", code: "aw" },
-    { classSuffix: "B", code: "bx" },
-    { classSuffix: "C", code: "cy" },
-    { classSuffix: "D", code: "dz" },
+    { classSuffix: "1", code: "v" },
+    { classSuffix: "2", code: "w" },
+    { classSuffix: "3", code: "x" },
+    { classSuffix: "4", code: "y" },
+    { classSuffix: "5", code: "z" },
   ];
 
   const users = [];
 
   grades.forEach((grade) => {
     classCodes.forEach(({ classSuffix, code }) => {
-      for (let i = 1; i <= 30; i++) {
+      // Loop untuk 40 siswa per kelas
+      for (let i = 1; i <= 40; i++) {
         const numStr = i < 10 ? `0${i}` : `${i}`;
         const key = `${grade}${code}${numStr}`;
 
@@ -20,7 +22,7 @@ function generateUsers() {
           username: `edu${key}`,
           password: `alfalah${key}`,
           grade: grade,
-          className: `${grade}${classSuffix}`,
+          className: `${grade}-${classSuffix}`, // Contoh output: "X-1", "XI-2", dll.
         });
       }
     });

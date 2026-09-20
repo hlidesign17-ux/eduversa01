@@ -12,6 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!loginForm) return;
 
+  // Helper untuk mengekstrak tingkat kelas ("X", "XI", atau "XII") dari nama kelas (misal "X-1" -> "X")
+  function extractGrade(className) {
+    if (!className) return "X";
+    if (className.startsWith("XII")) return "XII";
+    if (className.startsWith("XI")) return "XI";
+    if (className.startsWith("X")) return "X";
+    return "X";
+  }
+
   // Auto-fill & Lock Nama Lengkap & Kelas dari Supabase ketika username diisi
   if (usernameInput) {
     usernameInput.addEventListener("blur", async () => {
@@ -19,14 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!inputUsername) return;
 
       try {
+        // [PERBAIKAN 1]: Mengubah "users" menjadi "users01"
         const { data: userDb } = await supabase
-          .from("users")
+          .from("users01")
           .select("full_name, class_name")
           .eq("username", inputUsername)
           .maybeSingle();
 
         if (userDb) {
-          // JIKA USER SUDAH ADA: Isikan data asli dan KUNCI input agar tidak bisa diganti
+          // JIKA USER SUDAH ADA: Isikan data asli dan KUNCI input
           if (fullnameInput && userDb.full_name) {
             fullnameInput.value = userDb.full_name;
             fullnameInput.disabled = true;
@@ -83,9 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      // B. CEK PENGUNCIAN PERANGKAT DARI SUPABASE
+      // B. CEK PENGUNCIAN PERANGKAT DARI SUPABASE [PERBAIKAN 1: users01]
       const { data: boundUser, error: boundErr } = await supabase
-        .from("users")
+        .from("users01")
         .select("username")
         .eq("device_id", deviceId)
         .neq("username", inputUsername)
@@ -100,9 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // C. CEK EXISTENSI AKUN DI DATABASE SUPABASE
+      // C. CEK EXISTENSI AKUN DI DATABASE SUPABASE [PERBAIKAN 1: users01]
       const { data: existingUser } = await supabase
-        .from("users")
+        .from("users01")
         .select(
           "username, full_name, class_name, grade, score_latihan01, is_latihan01_submitted",
         )
@@ -111,17 +121,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let finalFullName = "";
       let finalClass = "";
-      let finalGrade = 4;
+      let finalGrade = "X";
 
       if (existingUser) {
-        // D1. JIKA AKUN SUDAH ADA -> GUNAKAN DATA ASLI DARI SUPABASE (Abaikan inputan baru jika ada)
+        // D1. JIKA AKUN SUDAH ADA
         finalFullName = existingUser.full_name;
         finalClass = existingUser.class_name;
-        finalGrade = existingUser.grade || parseInt(finalClass, 10) || 4;
+        
+        // [PERBAIKAN 2]: Menangani penentuan 'grade' berbasis Romawi X, XI, XII
+        finalGrade = existingUser.grade || extractGrade(finalClass);
 
-        // Cukup update device_id dan status aktif
+        // Update device_id dan status aktif [PERBAIKAN 1: users01]
         const { error: updateErr } = await supabase
-          .from("users")
+          .from("users01")
           .update({
             device_id: deviceId,
             is_used: true,
@@ -134,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
       } else {
-        // D2. JIKA AKUN BARU -> REKAP INPUT & INSERT AKUN BARU
+        // D2. JIKA AKUN BARU
         if (!inputFullName || !inputClass) {
           alert(
             "Harap lengkapi Nama Lengkap dan Kelas untuk pendaftaran awal!",
@@ -144,9 +156,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         finalFullName = inputFullName;
         finalClass = inputClass;
-        finalGrade = parseInt(inputClass, 10) || 4;
+        
+        // [PERBAIKAN 2]: Menangani penentuan 'grade' berbasis Romawi X, XI, XII
+        finalGrade = extractGrade(inputClass);
 
-        const { error: insertErr } = await supabase.from("users").insert({
+        // Insert akun baru [PERBAIKAN 1: users01]
+        const { error: insertErr } = await supabase.from("users01").insert({
           username: inputUsername,
           device_id: deviceId,
           is_used: true,
@@ -164,14 +179,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // E. BERSIHKAN SESI LAMA & SIMPAN SESI BARU DENGAN DATA VALID
+      // E. BERSIHKAN SESI LAMA & SIMPAN SESI BARU
       localStorage.removeItem("edualfalah_session");
 
       localStorage.setItem("edualfalah_device_owner", inputUsername);
       localStorage.setItem("edualfalah_fullname", finalFullName);
       localStorage.setItem("edualfalah_class", finalClass);
 
-      // E1. SINKRONISASI STATUS LATIHAN VIA BOOLEAN FLAG & SCORE
+      // Sinkronisasi status latihan
       const isSubmitted = existingUser
         ? Boolean(existingUser.is_latihan01_submitted)
         : false;
@@ -184,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(`latihan01_locked_${inputUsername}`, "true");
         localStorage.setItem(`latihan01_score_${inputUsername}`, userScore);
       } else {
-        // Jika belum mengerjakan, hapus cache status latihan
         localStorage.removeItem(`latihan01_locked_${inputUsername}`);
         localStorage.removeItem(`latihan01_score_${inputUsername}`);
       }
@@ -200,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }),
       );
 
-      // F. REDIRECT DENGAN JEDA SINGKAT
+      // F. REDIRECT
       setTimeout(() => {
         window.location.href = "05edualfalah2.html";
       }, 100);

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Cek Status Terkunci dari Supabase & Local Storage
   try {
     const { data: userDb } = await supabase
-      .from("users")
+      .from("users01")
       .select("is_latihan01_submitted")
       .eq("username", currentUsername)
       .maybeSingle();
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 2. Simpan Nilai DAN Status Submisi ke Supabase
     try {
       await supabase
-        .from("users")
+        .from("users01")
         .update({
           score_latihan01: finalScore,
           is_latihan01_submitted: true, // Kunci status pengerjaan secara permanen
