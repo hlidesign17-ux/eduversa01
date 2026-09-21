@@ -10,7 +10,7 @@ export const DATA_SOAL = [
   },
   {
     id: 3,
-    image: "assets/images/Soal03.png",
+    image: "assets/images/soal03.png",
     question:
       "Perhatikan penanda waktu pada gambar jam dan kalender di atas. The morning assembly always begins exactly _____ 07:00 AM _____ Monday morning.",
     options: ["in/on", "on/at", "at/on", "on/in"],
@@ -18,7 +18,7 @@ export const DATA_SOAL = [
   },
   {
     id: 4,
-    image: "assets/images/Soal04.png",
+    image: "assets/images/soal04.png",
     question:
       "Perhatikan visual lokasi di atas. Our new school branch is located _____ Bandung, precisely _____ Merdeka Street.",
     options: ["in/on", "on/at", "at/on", "on/in"],
@@ -26,7 +26,7 @@ export const DATA_SOAL = [
   },
   {
     id: 5,
-    image: "assets/images/Soal05.png",
+    image: "assets/images/soal05.png",
     question:
       "Perhatikan gambar dan jawab berdasarkan pilihan yang paling tepat",
     options: ["on/on", "at/on", "at/in", "in/on"],
@@ -34,7 +34,7 @@ export const DATA_SOAL = [
   },
   {
     id: 6,
-    image: "assets/images/Soal06.png",
+    image: "assets/images/soal06.png",
     question:
       "Perhatikan gambar dan jawab berdasarkan pilihan yang paling tepat",
     options: ["at/in", "in/on", "at/at", "7 garis"],
@@ -42,14 +42,14 @@ export const DATA_SOAL = [
   },
   {
     id: 7,
-    image: "assets/images/Soal07.png",
+    image: "assets/images/soal07.png",
     question: "Apa nama kelompok kode yang ditunjukkan oleh gambar di atas?",
     options: ["Event", "Control", "Motion", "Looks"],
     correctAnswer: 2, // Index jawaban benar (0=A, 1=B, 2=C, 3=D) motion
   },
   {
     id: 8,
-    image: "assets/images/Soal08.png",
+    image: "assets/images/soal08.png",
     question:
       "Perhatikan gambar di atas dengan teliti. Bagaimana kalimat kode yang tepat agar sprite Mario dapat berada tepat di bawah blok tanda tanya?",
     options: [
@@ -62,7 +62,7 @@ export const DATA_SOAL = [
   },
   {
     id: 9,
-    image: "assets/images/Soal09.png",
+    image: "assets/images/soal09.png",
     question:
       "Perhatikan gambar di atas dengan sangat teliti! Bagaimana kalimat kode yang tepat agar sprite Mario dapat berada tepat di bawah blok tanda tanya?",
     options: [
@@ -75,7 +75,7 @@ export const DATA_SOAL = [
   },
   {
     id: 10,
-    image: "assets/images/Soal10.png",
+    image: "assets/images/soal10.png",
     question:
       "Perhatikan gambar di atas dengan sangat teliti! Bagaimana kalimat kode yang tepat agar kaki dari sprite Mario dapat berada sama tinggi dengan pipa yang ada di sebelahnya?",
     options: [
