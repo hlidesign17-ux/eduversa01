@@ -1,7 +1,7 @@
 export const DATA_SOAL = [
   {
     id: 2,
-    image: "assets/images/Soal02.png",
+    image: "assets/images/soal02.png",
     question:
       "Berdasarkan posisi objek pada gambar di atas, pilihlah kata depan yang paling tepat untuk melengkapi kalimat berikut:'The student put his English dictionary _____ his backpack, while the cat was sleeping comfortable _____ the carpet",
     options: ["at/in", "in/on", "on/in", "at/on"],
